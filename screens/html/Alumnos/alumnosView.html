@@ -1,66 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salle Bajío - Alumnos</title>
+    <title>Registro de Alumnos</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #b3e5fc;
+            background-color: #b3e5fc; 
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px; 
         }
 
-        .navbar-brand {
-            font-weight: bold;
+        form {
+            max-width: 500px; 
+            width: 100%;
+            padding: 15px; 
+            border: 1px solid #ddd; 
+            border-radius: 20px; 
+            background-color: #f9f9f9; 
         }
 
-        h2 {
-            font-weight: bold;
+        #materiasChecklist {
             text-align: center;
-            margin-top: 20px;
-            color: black;
         }
 
-        .table-container {
-            background-color: white;
-            border-radius: 15px;
-            padding: 15px;
-            margin: 50px 50px 50px 50px;
-        }
-
-        .btn-red {
-            background-color: #f44336;
-            color: white;
-        }
-
-        .btn-red:hover {
-            background-color: #d32f2f;
-        }
-
-        .custom-navbar {
-            background-color: #0d6efd;
-            /* Azul Bootstrap */
-            color: white;
-        }
-
-        .custom-navbar .nav-link,
-        .custom-navbar .navbar-brand {
-            color: white !important;
-        }
-
-        #botonAgregar{
-            width: 110px; /* Para que no se rompa en dos líneas, y lo translade tal cual. */
-            margin-left: 50%;
-            transform: translateX(-50%);
+        .form-check {
+            display: inline-block;
+            margin-right: 10px;
         }
     </style>
 </head>
-
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg custom-navbar navbar-dark">
+    <nav class="navbar navbar-expand-lg custom-navbar navbar-dark bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">La Salle Bajío</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -70,87 +48,142 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="materiasView.html">Materias</a>
+                        <a class="nav-link" href="materiasCM.html">Materias</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="alumnosView.html">Alumnos</a>
+                        <a class="nav-link" href="alumnosCM.html">Alumnos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="CalificacionesView.html">Calificaciones</a>
+                        <a class="nav-link" href="CalificacionesCM.html">Calificaciones</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div>
-        <h2>Alumnos</h2>
+    <!-- Formulario -->
+    <div class="container mt-5 form-container">
+        <h2>Registro de Alumnos</h2>
+        <form id="formAlumno">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="apellidos" class="form-label">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="grado" class="form-label">Grado:</label>
+                <select id="grado" name="grado" class="form-select" required>
+                    <option value="" selected disabled>Selecciona un grado</option>
+                    <option value="1ro">1ro</option>
+                    <option value="2do">2do</option>
+                    <option value="3ro">3ro</option>
+                    <option value="4to">4to</option>
+                    <option value="5to">5to</option>
+                    <option value="6to">6to</option>
+                    <option value="7mo">7mo</option>
+                    <option value="8vo">8vo</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="materias" class="form-label">Materias:</label>
+                <div id="materiasChecklist">
+                    <!-- Materias disponibles se cargarán dinámicamente -->
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </div>
+        </form>
     </div>
-
-
-    <!-- Table Section -->
-    <div class="table-container">
-        <table class="table text-center">
-            <thead class="table-light">
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellidos</th>
-                    <th scope="col">Grado</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>Oziel Imanol</td>
-                    <td>Lemus Montelongo</td>
-                    <td>5to Semestre</td>
-                    <td><button class="btn btn-primary">Editar</button></td>
-                    <td><button class="btn btn-red" data-bs-toggle="modal" data-bs-target="#eliminarAlumno">Eliminar</button></td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>Donovan Vince</td>
-                    <td>Lara Alvarado</td>
-                    <td>8vo Semestre</td>
-                    <td><button class="btn btn-primary">Editar</button></td>
-                    <td><button class="btn btn-red" data-bs-toggle="modal" data-bs-target="#eliminarAlumno">Eliminar</button></td>
-
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div>
-        <button class="btn btn-success" id="botonAgregar">Agregar</button>
-    </div>
-
-  
 
     <!-- Modal -->
-    <div class="modal fade" id="eliminarAlumno" tabindex="-1" aria-labelledby="eliminarAlumnoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="eliminarAlumno">Eliminar alumno</h1>
+                    <h5 class="modal-title" id="successModalLabel">¡Éxito!</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ¿Estás seguro de querer eliminar al alumno?
+                    Alumno guardado con éxito.
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-danger">Eliminar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="redirect()">Aceptar</button>
                 </div>
             </div>
         </div>
     </div>
 
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script>
+        const form = document.getElementById("formAlumno");
+        const materiasChecklist = document.getElementById("materiasChecklist");
+        const editarAlumno = JSON.parse(localStorage.getItem("editarAlumno")) || null;
 
+        function cargarMaterias() {
+            const materias = JSON.parse(localStorage.getItem("materias")) || [];
+            materiasChecklist.innerHTML = "";
+            materias.forEach((materia) => {
+                const checkbox = `
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="${materia}" id="${materia}">
+                        <label class="form-check-label" for="${materia}">${materia}</label>
+                    </div>
+                `;
+                materiasChecklist.innerHTML += checkbox;
+            });
+        }
+
+        function cargarDatosAlumno() {
+            if (editarAlumno) {
+                document.getElementById("nombre").value = editarAlumno.nombre;
+                document.getElementById("apellidos").value = editarAlumno.apellidos;
+                document.getElementById("grado").value = editarAlumno.grado;
+                editarAlumno.materias.forEach((materia) => {
+                    const checkbox = document.getElementById(materia);
+                    if (checkbox) checkbox.checked = true;
+                });
+            }
+        }
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const nombre = document.getElementById("nombre").value;
+            const apellidos = document.getElementById("apellidos").value;
+            const grado = document.getElementById("grado").value;
+
+            const materiasSeleccionadas = Array.from(
+                document.querySelectorAll("#materiasChecklist .form-check-input:checked")
+            ).map((checkbox) => checkbox.value);
+
+            const alumno = { nombre, apellidos, grado, materias: materiasSeleccionadas };
+
+            let alumnos = JSON.parse(localStorage.getItem("alumnos")) || [];
+            if (editarAlumno) {
+                const index = alumnos.findIndex(
+                    (a) => a.nombre === editarAlumno.nombre && a.apellidos === editarAlumno.apellidos
+                );
+                alumnos[index] = alumno;
+                localStorage.removeItem("editarAlumno");
+            } else {
+                alumnos.push(alumno);
+            }
+            localStorage.setItem("alumnos", JSON.stringify(alumnos));
+
+            const modal = new bootstrap.Modal(document.getElementById("successModal"));
+            modal.show();
+        });
+
+        function redirect() {
+            window.location.href = "alumnosCM.html";
+        }
+
+        cargarMaterias();
+        cargarDatosAlumno();
+    </script>
+</body>
 </html>
