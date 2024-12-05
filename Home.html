@@ -20,11 +20,25 @@
         </div>
         <form class="form" action="">
             <label class="form_text" for="">Usuario:</label>
-            <input class="form_input" type="text">
+            <input class="form_input" type="text" id="usuario">
             <label class="form_text" for="">Contraseña:</label>
-            <input class="form_input" type="password" name="" id="">
-            <a class="form_btn" href="">Iniciar sesión <span class="fa-solid fa-user"></span></a>
+            <input class="form_input" type="password" id="password">
+            <a class="form_btn" href="#" onclick="return validarLogin()">Iniciar sesión <span class="fa-solid fa-user"></span></a>
         </form>
     </div>
+    <script>
+        function validarLogin() {
+            const usuario = document.getElementById('usuario').value;
+            const password = document.getElementById('password').value;
+            
+            if (usuario === 'RAOGIM' && password === 'admin123') {
+                window.location.href = '/screens/html/Materias/materiasView.html';
+                return false;
+            } else {
+                alert('Usuario o contraseña incorrectos');
+                return false;
+            }
+        }
+    </script>
 </body>
 </html>
