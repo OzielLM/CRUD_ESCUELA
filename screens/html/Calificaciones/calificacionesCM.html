@@ -12,14 +12,20 @@
         <object type="text/html" data="../../../index.html" style="width: 100%; height: 60px;"></object>
     <div class="container">
         <form>
-            <h2>Calificaciones</h2>
-            <label for="materia">Materia:</label>
-            <input type="text" id="nombreMateriaCal" name="nombreMateriaCal" class="inputData"><br><br>
-            <label for="Alumno">Alumno:</label>
-            <input type="text" id="nombreAlumno" name="nombreAlumno" class="inputData"><br><br>
-            <label for="apellidos">Calificacion:</label>
-            <input type="number" id="calificacionAlumno" name="calificacionAlumno" class="inputData"><br><br>
-            <input type="submit" value="Agregar" class="button-contenedor">
+            <h2>Nombre del alumno</h2>
+            <div class="table-container">
+                <table class="table text-center">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Materia</th>
+                            <th scope="col">Calificación</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calificacionesTableBody">
+                        <!-- Las filas se generarán dinámicamente con JavaScript -->
+                    </tbody>
+                </table>
+            </div>
             <br>
         </form>
     </div>
