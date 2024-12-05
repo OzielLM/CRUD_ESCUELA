@@ -51,6 +51,9 @@ botonConfirmarEliminar.addEventListener('click', () => {
 });
 
 document.getElementById('botonAgregar').addEventListener('click', function () {
+    if (localStorage.getItem('index')) {
+        localStorage.removeItem('index');
+    }
     window.location.href = 'materiasCM.html';
 });
 
