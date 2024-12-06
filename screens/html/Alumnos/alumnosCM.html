@@ -102,65 +102,78 @@
         const form = document.getElementById("formAlumno");
         const materiasChecklist = document.getElementById("materiasChecklist");
         const editarAlumno = JSON.parse(localStorage.getItem("editarAlumno")) || null;
-
+    
         function cargarMaterias() {
             const materias = JSON.parse(localStorage.getItem("materias")) || [];
             materiasChecklist.innerHTML = "";
             materias.forEach((materia) => {
                 const checkbox = `
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="${materia}" id="${materia}">
-                        <label class="form-check-label" for="${materia}">${materia}</label>
+                        <input class="form-check-input" type="checkbox" value="${materia.nombre}" id="${materia.nombre}">
+                        <label class="form-check-label" for="${materia.nombre}">${materia.nombre}</label>
                     </div>
                 `;
                 materiasChecklist.innerHTML += checkbox;
             });
         }
-
+    
         function cargarDatosAlumno() {
             if (editarAlumno) {
                 document.getElementById("nombre").value = editarAlumno.nombre;
                 document.getElementById("apellidos").value = editarAlumno.apellidos;
                 document.getElementById("grado").value = editarAlumno.grado;
+    
                 editarAlumno.materias.forEach((materia) => {
                     const checkbox = document.getElementById(materia);
                     if (checkbox) checkbox.checked = true;
                 });
             }
         }
-
+    
         form.addEventListener("submit", (e) => {
             e.preventDefault();
+    
             const nombre = document.getElementById("nombre").value;
             const apellidos = document.getElementById("apellidos").value;
             const grado = document.getElementById("grado").value;
-
+    
             const materiasSeleccionadas = Array.from(
                 document.querySelectorAll("#materiasChecklist .form-check-input:checked")
             ).map((checkbox) => checkbox.value);
-
+    
             const alumno = { nombre, apellidos, grado, materias: materiasSeleccionadas };
-
+    
             let alumnos = JSON.parse(localStorage.getItem("alumnos")) || [];
+    
             if (editarAlumno) {
                 const index = alumnos.findIndex(
                     (a) => a.nombre === editarAlumno.nombre && a.apellidos === editarAlumno.apellidos
                 );
-                alumnos[index] = alumno;
+    
+                const calificacionesPrevias = alumnos[index]?.calificaciones || [];
+                const calificacionesActualizadas = materiasSeleccionadas.map((materia) => {
+                    const materiaIndex = editarAlumno.materias.indexOf(materia);
+                    return materiaIndex !== -1 ? calificacionesPrevias[materiaIndex] : 0;
+                });
+    
+                alumnos[index] = { ...alumno, calificaciones: calificacionesActualizadas };
+    
                 localStorage.removeItem("editarAlumno");
             } else {
+                alumno.calificaciones = materiasSeleccionadas.map(() => 0);
                 alumnos.push(alumno);
             }
+    
             localStorage.setItem("alumnos", JSON.stringify(alumnos));
-
+    
             const modal = new bootstrap.Modal(document.getElementById("successModal"));
             modal.show();
         });
-
+    
         function redirect() {
-            window.location.href = "alumnosCM.html";
+            window.location.href = "alumnosView.html";
         }
-
+    
         cargarMaterias();
         cargarDatosAlumno();
     </script>
