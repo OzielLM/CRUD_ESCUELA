@@ -85,7 +85,7 @@
                 </tbody>
             </table>
         </div>
-        <button class="btn btn-success" id="botonAgregar" onclick="window.location.href='alumnosView.html'">Agregar</button>
+        <button class="btn btn-success" id="botonAgregar" onclick="window.location.href='alumnosCM.html'">Agregar</button>
     </div>
 
     <!-- Modal -->
@@ -149,7 +149,7 @@
         function editarAlumno(index) {
             const alumno = alumnos[index];
             localStorage.setItem("editarAlumno", JSON.stringify(alumno));
-            window.location.href = "alumnosView.html";
+            window.location.href = "alumnosCM.html";
         }
 
         cargarLista();
